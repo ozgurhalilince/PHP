@@ -4,27 +4,20 @@
 
 <?php 
 
-$baglanti = mysqli_connect("localhost","root","3103709","OgrenciBilgiSistemi");
+$baglanti = mysqli_connect("localhost","root","","OgrenciBilgiSistemi");		//MySQL'e bağlanır.
 
 //Baglantiyi Kontrol Et
 if (mysqli_connect_errno($baglanti)){
-echo "MySQLe baglanamadi: " . mysqli_connect_error();
+echo "MySQLe baglanamadi: " . mysqli_connect_error();	// MySQL'e bağlanıp bağlanmadığını kontrol ederiz
 }
-//else{
-//	echo "MySQLe baglandi.";
-//}
 
-$sonuclar = mysqli_query($baglanti,"SELECT * FROM ogrenciler");
+$sonuclar = mysqli_query($baglanti,"SELECT * FROM ogrenciler ORDER BY `not` DESC");	// ORDER BY `not` DESC komutu notları büyükten küçüğe sıralar
 
-//while($row = mysqli_fetch_array($sonuclar)) {
-//  echo $row['ad'] . " " . $row['soyad'];
-//  echo "<br>";
-//  }
 ?>
 <center>
 <table> <td> 
-	<?php  
-while ($row = mysqli_fetch_array($sonuclar)) {
+	<?php  	
+while ($row = mysqli_fetch_array($sonuclar)) {		// Sonucları tek tek ekrana yazdırırız.
 	echo "<tr>";
 	echo "Adı: " . $row['ad'] . "<br>";
 	echo "Soyadı: " . $row['soyad'] . "<br>";
@@ -39,7 +32,7 @@ while ($row = mysqli_fetch_array($sonuclar)) {
 </table>
 </center>
 <?php  
-mysqli_close($baglanti);
+mysqli_close($baglanti);		// Bağlantıyı sonlandırırız.
 ?>
  
 </body>
