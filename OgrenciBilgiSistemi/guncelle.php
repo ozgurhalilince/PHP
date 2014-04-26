@@ -27,7 +27,7 @@
 
 	if ($guncellenecekAlan != "" && sayiControl($girilenNumara) && kelimeControl($yeniDeger)) {	//guncellenecekAlanı boş girmediyse ve sayi doğru girildiyse işlemler yapılır.
 	
-		$baglanti = mysqli_connect("localhost","root","3103709","OgrenciBilgiSistemi");		//MySQL'e bağlanır.
+		$baglanti = mysqli_connect("localhost","root","","OgrenciBilgiSistemi");		//MySQL'e bağlanır.
 		$sonuclar = mysqli_query($baglanti,"SELECT * FROM ogrenciler ORDER BY `not` DESC");		
 
 		while ($row = mysqli_fetch_array($sonuclar)) {		// Sonuclar arasında tek tek karşılaştırma yaparız.
@@ -43,20 +43,16 @@
 						echo "Notu: " . $row['not'] . "<br></h4>";
 					}
 				}
-				if (!$flag1) {
-					echo "<h1> Sistemde numarası $silinecekNumara olan öğrenci kaydı bulunmamaktadır. "
+		if (!$flag1) {
+			echo "<h1> Sistemde numarası $silinecekNumara olan öğrenci kaydı bulunmamaktadır. "
 			. "<br>Lutfen tekrar deneyiniz. </h1>";
 				}
+				
+		mysqli_close($baglanti);	// Bağlantıyı sonlandırmak için bu komutu kullanırız.
 	}
 
 	else
 		echo "Lütfen geçerli değerler giriniz.";
-
-
-		//mysqli_query($baglanti,"UPDATE ogrenciler SET `ad`= 'Meral'
-		//WHERE FirstName='Peter' AND LastName='Griffin'");
- 
-		//mysqli_close($baglanti);	// Bağlantıyı sonlandırmak için bu komutu kullanırız.
 
 
 	function sayiControl($gelenSayi){
